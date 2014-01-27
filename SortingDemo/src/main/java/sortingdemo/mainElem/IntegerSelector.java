@@ -17,7 +17,7 @@ public class IntegerSelector {
 
     public IntegerSelector(Scanner scanner) {
         this.scanner = scanner;
-        rng = new Random();
+        this.rng = new Random();
     }
 
     public void start() {
@@ -25,11 +25,11 @@ public class IntegerSelector {
         boolean exitCommandIsNotGiven = true;
 
         while (exitCommandIsNotGiven) {
-            System.out.println("1: Randomly generate a set amount");
-            System.out.println("2: Select each number one by one");
+            System.out.println("1: Select each number one by one");
+            System.out.println("2: Randomly generate a set amount");            
             System.out.println("x: Back\n");
 
-            String command = scanner.nextLine();
+            String command = this.scanner.nextLine();
 
             exitCommandIsNotGiven = handleMenuCommands(command);
         }
@@ -41,15 +41,16 @@ public class IntegerSelector {
         if (command.equals("1")) {
             Integer quantity = chooseQuantity();
             enterOneByOne(quantity);
-            System.out.println(Arrays.toString(sortTarget));
         } else if (command.equals("2")) {
             Integer quantity = chooseQuantity();
             generateRandomIntegers(quantity);
-            System.out.println(Arrays.toString(sortTarget));
         } else if (command.equalsIgnoreCase("x")) {
             return false;
         }
 
+        if (this.ArrayWasInitializedProperly()) {
+            
+        }
         return true;
     }
 
@@ -65,12 +66,17 @@ public class IntegerSelector {
             return;
         }
 
-        sortTarget = new Integer[quantity];
+        this.sortTarget = new Integer[quantity];
+        System.out.println("Type a number and press enter until done:\n");
         for (int i = 0; i < quantity; i++) {
             Integer current = addInteger();
 
             if (current != null) {
-                sortTarget[i] = current;
+                this.sortTarget[i] = current;
+            } else {
+                System.out.println("\nNot a number. T2"
+                        + "ry again\n");
+                i--;
             }
         }
     }
@@ -81,9 +87,10 @@ public class IntegerSelector {
             return;
         }
         
-        sortTarget = new Integer[quantity];
+        this.sortTarget = new Integer[quantity];
         for (int i = 0; i < quantity; i++) {
-            Integer current = rng.nextInt(10);            
+            Integer current = rng.nextInt(10);
+            this.sortTarget[i] = current;
         }
     }
 
@@ -93,5 +100,16 @@ public class IntegerSelector {
         } catch (NumberFormatException e) {
             return null;
         }
+    }
+    
+    public boolean ArrayWasInitializedProperly() {
+        if (sortTarget != null) {
+            for (int i = 0; i < sortTarget.length; i++) {
+                if (sortTarget[i] == null) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

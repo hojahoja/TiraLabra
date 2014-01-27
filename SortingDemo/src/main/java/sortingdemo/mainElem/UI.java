@@ -73,7 +73,7 @@ public class UI {
     private void demoMenu() {
         System.out.println("\nChoose an algorithm");
         boolean backCommandIsNotGiven = true;
-        
+
         while (backCommandIsNotGiven) {
             System.out.println("1: Merge sort");
             System.out.println("2: Heapsort");
@@ -81,21 +81,39 @@ public class UI {
             System.out.println("x: Back\n");
 
             String command = scanner.nextLine();
+            backCommandIsNotGiven = handleDemoMenuCommands(command, backCommandIsNotGiven);
             
-            intSelect.start();
-
-            backCommandIsNotGiven = handleDemoMenuCommands(command);
+            if (intSelect.ArrayWasInitializedProperly()) {
+                runDemo(command);
+            }
         }
     }
 
-    private boolean handleDemoMenuCommands(String command) {
-        if (command.equals("1")) {
-            
-        }
+    private boolean handleDemoMenuCommands(String command, boolean backCommandIsNotGiven) {
+        boolean anAlgorithmWasSelected = command.equals("1") || command.equals("2") || command.equals("3");
         
-        return true;
+        if (anAlgorithmWasSelected) {
+            intSelect.start();
+        } else if (command.equalsIgnoreCase("x")) {
+            backCommandIsNotGiven = false;
+        }
+        return backCommandIsNotGiven;
     }
 
     private void comparisonMenu() {
+    }
+
+    private void runDemo(String command) {
+        boolean choseMergeSort = command.equals("1");
+        boolean choseHeapSort = command.equals("2");
+        boolean choseQuicksort = command.equals("3");
+        
+        if (choseMergeSort) {
+            
+        } else if (choseHeapSort) {
+            
+        } else if (choseQuicksort) {
+            
+        }
     }
 }
