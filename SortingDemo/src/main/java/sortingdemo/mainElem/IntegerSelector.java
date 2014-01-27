@@ -26,7 +26,7 @@ public class IntegerSelector {
 
         while (exitCommandIsNotGiven) {
             System.out.println("1: Select each number one by one");
-            System.out.println("2: Randomly generate a set amount");            
+            System.out.println("2: Randomly generate a set amount");
             System.out.println("x: Back\n");
 
             String command = this.scanner.nextLine();
@@ -49,7 +49,7 @@ public class IntegerSelector {
         }
 
         if (this.ArrayWasInitializedProperly()) {
-            
+            return false;
         }
         return true;
     }
@@ -74,8 +74,7 @@ public class IntegerSelector {
             if (current != null) {
                 this.sortTarget[i] = current;
             } else {
-                System.out.println("\nNot a number. T2"
-                        + "ry again\n");
+                System.out.println("\nNot a number. Try again\n");
                 i--;
             }
         }
@@ -86,7 +85,7 @@ public class IntegerSelector {
             System.out.println("\nWrong Input\n");
             return;
         }
-        
+
         this.sortTarget = new Integer[quantity];
         for (int i = 0; i < quantity; i++) {
             Integer current = rng.nextInt(10);
@@ -101,7 +100,7 @@ public class IntegerSelector {
             return null;
         }
     }
-    
+
     public boolean ArrayWasInitializedProperly() {
         if (sortTarget != null) {
             for (int i = 0; i < sortTarget.length; i++) {

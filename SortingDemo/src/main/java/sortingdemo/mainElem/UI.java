@@ -82,7 +82,7 @@ public class UI {
 
             String command = scanner.nextLine();
             backCommandIsNotGiven = handleDemoMenuCommands(command, backCommandIsNotGiven);
-            
+
             if (intSelect.ArrayWasInitializedProperly()) {
                 runDemo(command);
             }
@@ -91,7 +91,7 @@ public class UI {
 
     private boolean handleDemoMenuCommands(String command, boolean backCommandIsNotGiven) {
         boolean anAlgorithmWasSelected = command.equals("1") || command.equals("2") || command.equals("3");
-        
+
         if (anAlgorithmWasSelected) {
             intSelect.start();
         } else if (command.equalsIgnoreCase("x")) {
@@ -100,20 +100,18 @@ public class UI {
         return backCommandIsNotGiven;
     }
 
-    private void comparisonMenu() {
-    }
-
     private void runDemo(String command) {
         boolean choseMergeSort = command.equals("1");
         boolean choseHeapSort = command.equals("2");
         boolean choseQuicksort = command.equals("3");
-        
+
         if (choseMergeSort) {
-            
         } else if (choseHeapSort) {
-            
         } else if (choseQuicksort) {
-            
         }
+    }
+
+    private void comparisonMenu() {
+        System.out.println("\nWork In Progress\n");
     }
 }
