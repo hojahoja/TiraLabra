@@ -62,7 +62,7 @@ public class UI {
         } else if (command.equalsIgnoreCase("x")) {
             return false;
         } else {
-            System.out.println("\nWrong Input");
+            System.out.println("\nWrong Input\n");
         }
         return true;
     }
@@ -78,11 +78,11 @@ public class UI {
             System.out.println("1: Merge sort");
             System.out.println("2: Heapsort");
             System.out.println("3: Quicksort");
-            System.out.println("x: Back");
+            System.out.println("x: Back\n");
 
             String command = scanner.nextLine();
             
-            
+            intSelect.start();
 
             backCommandIsNotGiven = handleDemoMenuCommands(command);
         }
