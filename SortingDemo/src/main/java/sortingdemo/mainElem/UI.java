@@ -120,15 +120,7 @@ public class UI {
     }
 
     private void comparisonMenu() {
-
-        System.out.println("Choose the algorithm you want to compare.\n"
-                + "Typing the number input again deselects the algorithm");
-        System.out.println("1: Merge sort");
-        System.out.println("2: Quicksort");
-        System.out.println("3: Heapsort");
-        System.out.println("s: Start with a new Array");
-        System.out.println("r: Retry with previous Array");
-        System.out.println("x: Back\n");
+        comparisonMenuOptions();
         
         try {
             handeComparisonMenuCommands();
@@ -151,8 +143,10 @@ public class UI {
             } else if (command.equals("s")) {
                 intSelect.start();
                 startComparison(selected);
+                comparisonMenuOptions();
             } else if (command.equals("r")) {
                 startComparison(selected);
+                comparisonMenuOptions();
             } else if (command.equals("x")) {
                 break;
             }
@@ -181,5 +175,16 @@ public class UI {
         long elapsedTime = System.nanoTime() - start;
 
         System.out.println("\n" + algo + ":" + elapsedTime / 1000000000.0 + "s");
+    }
+
+    private void comparisonMenuOptions() {
+        System.out.println("\nChoose the algorithm you want to compare.\n"
+                + "Typing the number input again deselects the algorithm");
+        System.out.println("1: Merge sort");
+        System.out.println("2: Quicksort");
+        System.out.println("3: Heapsort");
+        System.out.println("s: Start with a new array");
+        System.out.println("r: Retry with previous array");
+        System.out.println("x: Back\n");
     }
 }
