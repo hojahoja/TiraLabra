@@ -1,6 +1,8 @@
 package sortingdemo.mainElem;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class handles the text based user interface
@@ -11,10 +13,16 @@ public class UI {
 
     private Scanner scanner;
     private IntegerSelector intSelect;
+    private MergeSort mergeSort;
+    private QuickSort quickSort;
+    private HeapSort heapSort;
 
     public UI() {
         scanner = new Scanner(System.in);
         intSelect = new IntegerSelector(scanner);
+        mergeSort = new MergeSort();
+        quickSort = new QuickSort();
+        heapSort = new HeapSort();
     }
 
     /**
@@ -112,6 +120,66 @@ public class UI {
     }
 
     private void comparisonMenu() {
-        System.out.println("\nWork In Progress\n");
+
+        System.out.println("Choose the algorithm you want to compare.\n"
+                + "Typing the number input again deselects the algorithm");
+        System.out.println("1: Merge sort");
+        System.out.println("2: Quicksort");
+        System.out.println("3: Heapsort");
+        System.out.println("s: Start with a new Array");
+        System.out.println("r: Retry with previous Array");
+        System.out.println("x: Back\n");
+        
+        try {
+            handeComparisonMenuCommands();
+        } catch (Exception ex) {
+            System.out.println("\nYou must create the array first\n");
+        }
+    }
+
+    private void handeComparisonMenuCommands() throws Exception {
+        boolean[] selected = new boolean[3];
+
+        while (true) {
+            String command = scanner.nextLine();
+            if (command.equals("1")) {
+                selected[0] = true;
+            } else if (command.equals("2")) {
+                selected[1] = true;
+            } else if (command.equals("3")) {
+                selected[2] = true;
+            } else if (command.equals("s")) {
+                intSelect.start();
+                startComparison(selected);
+            } else if (command.equals("r")) {
+                startComparison(selected);
+            } else if (command.equals("x")) {
+                break;
+            }
+        }
+    }
+
+    private void startComparison(boolean[] selected) throws Exception {
+
+        if (selected[0] == true) {
+            timedSort(mergeSort);
+        }
+        if (selected[1] == true) {
+            timedSort(quickSort);
+        }
+        if (selected[2] == true) {
+            timedSort(heapSort);
+        }
+
+    }
+
+    private void timedSort(SortingAlgorithm algo) throws Exception {
+        algo.insertArray(intSelect.getArray());
+
+        long start = System.nanoTime();
+        algo.sort();
+        long elapsedTime = System.nanoTime() - start;
+
+        System.out.println("\n" + algo + ":" + elapsedTime / 1000000000.0 + "s");
     }
 }

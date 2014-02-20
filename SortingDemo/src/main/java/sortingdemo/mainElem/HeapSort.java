@@ -5,7 +5,7 @@ package sortingdemo.mainElem;
  *
  * @author juri
  */
-public class HeapSort {
+public class HeapSort implements SortingAlgorithm{
 
     private Integer[] sortTarget;
     private  int heapSize;
@@ -67,5 +67,9 @@ public class HeapSort {
 
     public Integer[] getSortTarget() {
         return sortTarget;
+    }
+    
+    public String toString() {
+        return "HeapSort";
     }
 }

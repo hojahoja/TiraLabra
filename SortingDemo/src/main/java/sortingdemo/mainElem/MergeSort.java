@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * @author juri
  */
-public class MergeSort {
+public class MergeSort implements SortingAlgorithm{
 
     private Integer[] sortTarget;
 
@@ -60,5 +60,9 @@ public class MergeSort {
 
     public Integer[] getSortTarget() {
         return sortTarget;
+    }
+    
+    public String toString() {
+        return "MergeSort";
     }
 }

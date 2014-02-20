@@ -5,7 +5,7 @@ package sortingdemo.mainElem;
  *
  * @author juri
  */
-public class QuickSort {
+public class QuickSort implements SortingAlgorithm{
 
     private Integer[] sortTarget;
 
@@ -65,5 +65,9 @@ public class QuickSort {
 
     public Integer[] getSortTarget() {
         return sortTarget;
+    }
+    
+    public String toString() {
+        return "QuickSort";
     }
 }

@@ -88,7 +88,7 @@ public class IntegerSelector {
 
         this.sortTarget = new Integer[quantity];
         for (int i = 0; i < quantity; i++) {
-            Integer current = rng.nextInt(10);
+            Integer current = rng.nextInt(100);
             this.sortTarget[i] = current;
         }
     }
@@ -110,5 +110,9 @@ public class IntegerSelector {
             }
         }
         return true;
+    }
+    
+    public Integer[] getArray() {
+        return sortTarget;
     }
 }
