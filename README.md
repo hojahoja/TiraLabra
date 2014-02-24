@@ -13,11 +13,9 @@ Alkuvalikko
 
 Ohjelman käynnistyessä avautuu vastaavanlainen alkuvalikko:
 
-1: Show Arrays On/Off
-
-2: Time comparison
-
-x: Stop the program
+	1: Show Arrays On/Off
+	2: Time comparison
+	x: Stop the program
 
 Tarkoituksena on kirjoittaa komentoriville kaksoispisteen takana oleva merkki terminaaliin ja painaa entteriä. 
 
@@ -30,26 +28,19 @@ Time Comparison
 
 valikko:
 
-Choose the algorithm you want to compare.
-Typing the number input again deselects the algorithm
+	Choose the algorithm you want to compare.
+	Typing the number input again deselects the algorithm
 
-1: Merge sort
-
-2: Quicksort
-
-3: Heapsort
-
-s: Start with a new array
-
-r: Retry with previous array
-
-x: Back
+	1: Merge sort
+	2: Quicksort
+	3: Heapsort
+	s: Start with a new array
+	r: Retry with previous array
+	x: Back
 
 
-
-Visible arrays: Off
-
-Selected Algorithms: 
+	Visible arrays: Off
+	Selected Algorithms: 
 
 
 
@@ -59,13 +50,10 @@ Vaihtoehdoilla 1, 2 ja 3 valitaan, mitä algoritmeja halutaan käsitellä. Valit
 Taulukon luonti
 --------------------
 
-Choose input method for integers
-
-1: Select each number one by one
-
-2: Randomly generate a set amount
-
-x: Back
+	Choose input method for integers
+	1: Select each number one by one
+	2: Randomly generate a set amount
+	x: Back
 
 Ensimmäinen vaihtoehto antaa sinun luoda taulukon luvun luvulta. Ensin sinua pyydetään antamaan taulukon koko ja tämän jälkeen voit syöttää jokaisen luvun komentoriville yksi kerrallaan. Toinen vaihtoehto luo satunnaisen taulukon itse. Sinun tarvitsee ainoastaan syöttää taulukon koko. Kun valinnat on tehty, ohjelma käynnistää aikavertailun itsestään.
 
