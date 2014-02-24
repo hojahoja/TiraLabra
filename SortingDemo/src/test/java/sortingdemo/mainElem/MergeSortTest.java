@@ -58,7 +58,7 @@ public class MergeSortTest {
         
         assertFalse("Something went wrong with the test", checkIfSorted(ms.getSortTarget()));
         ms.sort();
-        assertTrue(checkIfSorted(ms.getSortTarget()));
+        assertTrue("Sorting failed", checkIfSorted(ms.getSortTarget()));
     }
     
     @Test
@@ -68,6 +68,42 @@ public class MergeSortTest {
         assertFalse("Something went wrong with the test", checkIfSorted(ms.getSortTarget()));
         ms.sort();
         assertTrue("Sorting failed", checkIfSorted(ms.getSortTarget()));
+    }
+    
+    @Test
+    public void canSortReverseArray() {
+        Integer[] arr = {10,9,8,7,6,5,4,3,2,1};
+        ms.insertArray(arr);
+        ms.insertArray(arr);
+        assertFalse("Something went wrong with the test", checkIfSorted(ms.getSortTarget()));
+        ms.sort();
+        assertTrue("Sorting failed", checkIfSorted(ms.getSortTarget()));
+    }
+    
+    @Test
+    public void canSortAnArrayWithNoDifferingValues() {
+        Integer[] arr = new Integer[100];
+        for (int i = 0; i < 100; i++) {
+            arr[i] = 1;
+        }
+        
+        ms.insertArray(arr);
+        ms.sort();
+        assertTrue("Sorting failed", checkIfSorted(ms.getSortTarget()));
+    }
+    
+    @Test
+    public void wontCrashWhenHandlingAnArrayWithASingleInteger() {
+        Integer[] arr = {1};
+        ms.insertArray(arr);
+        
+        
+        try {
+            ms.sort();
+            assertTrue(true);
+        } catch (Exception e) {
+            assertFalse(e.getMessage(),true);
+        }        
     }
     
     private boolean checkIfSorted(Integer[] arr) {

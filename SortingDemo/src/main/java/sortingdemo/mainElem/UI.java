@@ -31,6 +31,7 @@ public class UI {
 
     /**
      * The whole program is started with this method.
+     *
      */
     public void start() {
         String command = "";
@@ -44,7 +45,7 @@ public class UI {
     }
 
     /**
-     * this string
+     * Prints the initial menu commands and asks for the command.
      *
      * @param command
      * @return
@@ -62,7 +63,6 @@ public class UI {
     /**
      * Checks which command was typed in the first menu and acts accordingly.
      *
-     *
      * @param command the typed command as a string
      * @return
      */
@@ -79,6 +79,10 @@ public class UI {
         return true;
     }
 
+    /**
+     * A help method created to toggle the boolean showArray.
+     *
+     */
     private void toggleVisibleArrays() {
         if (showArray == true) {
             showArray = false;
@@ -86,9 +90,10 @@ public class UI {
             showArray = true;
         }
     }
-    
+
     /**
      * Shows the demo menu.
+     *
      */
     private void demoMenu() {
         System.out.println("\nChoose an algorithm");
@@ -109,6 +114,13 @@ public class UI {
         }
     }
 
+    /**
+     * Handles the demo menu commands
+     *
+     * @param command
+     * @param backCommandIsNotGiven
+     * @return true if back Command was given
+     */
     private boolean handleDemoMenuCommands(String command, boolean backCommandIsNotGiven) {
         boolean anAlgorithmWasSelected = command.equals("1") || command.equals("2") || command.equals("3");
 
@@ -120,6 +132,11 @@ public class UI {
         return backCommandIsNotGiven;
     }
 
+    /**
+     * Runs the chosen demo.
+     *
+     * @param command
+     */
     private void runDemo(String command) {
         boolean choseMergeSort = command.equals("1");
         boolean choseHeapSort = command.equals("2");
@@ -131,9 +148,15 @@ public class UI {
         }
     }
 
+    /**
+     * Shows the initial menu for algorithm comparison. Checks for an exception
+     * where all arrays were not properly initialized for each algorithm class.
+     * The user will be notified of this.
+     *
+     */
     private void comparisonMenu() {
         comparisonMenuOptions();
-        
+
         try {
             handeComparisonMenuCommands();
         } catch (Exception ex) {
@@ -141,14 +164,21 @@ public class UI {
         }
     }
 
+    /**
+     * Asks for use input and acts accordingly this. and prints the menu and
+     * select options. If the r command is selected before initializing arrays
+     * first an exception will be thrown.
+     *
+     * @throws Exception
+     */
     private void handeComparisonMenuCommands() throws Exception {
         printOptionsMessage();
 
         while (true) {
-            String command = scanner.nextLine();    
-            
-            
-            
+            String command = scanner.nextLine();
+
+
+
             if (command.equals("1")) {
                 toggleSelectedAlgorithm(0);
             } else if (command.equals("2")) {
@@ -165,12 +195,17 @@ public class UI {
             } else if (command.equals("x")) {
                 break;
             }
-            
+
             comparisonMenuOptions();
             printOptionsMessage();
         }
     }
-    
+
+    /**
+     * This method helps to toggle the boolean value inside selected array
+     *
+     * @param index The index of the algorithm.
+     */
     private void toggleSelectedAlgorithm(int index) {
         if (selected[index] == true) {
             selected[index] = false;
@@ -178,7 +213,11 @@ public class UI {
             selected[index] = true;
         }
     }
-    
+
+    /**
+     * Prints currently selected algorithms and the "Visible array" option.
+     *
+     */
     private void printOptionsMessage() {
         System.out.println("\n");
         System.out.print("Visible arrays: ");
@@ -187,7 +226,7 @@ public class UI {
         } else {
             System.out.println("Off");
         }
-        
+
         System.out.println("Selected Algorithms: ");
         if (selected[0] == true) {
             System.out.print(" MergeSort");
@@ -198,17 +237,24 @@ public class UI {
         if (selected[2] == true) {
             System.out.print(" HeapSort");
         }
-        
+
         System.out.println();
     }
 
+    /**
+     * Calls the timedSort method for each selected algorithm.
+     *
+     * @param selected This array contains information about which algorithm was
+     * selected
+     * @throws Exception If the arrays are not properly initialized
+     */
     private void startComparison(boolean[] selected) throws Exception {
 
         if (showArray) {
-            System.out.println("target array: "+Arrays.toString(intSelect.getArray())+"\n");
+            System.out.println("target array: " + Arrays.toString(intSelect.getArray()) + "\n");
         }
 
-        
+
         if (selected[0] == true) {
             timedSort(mergeSort);
         }
@@ -221,6 +267,13 @@ public class UI {
 
     }
 
+    /**
+     * Runs the sorting algorithm and times it's performance. Prints the
+     * information to the user
+     *
+     * @param algo The algorithm class
+     * @throws Exception If the arrays are not properly initialized
+     */
     private void timedSort(SortingAlgorithm algo) throws Exception {
         algo.insertArray(intSelect.getArray());
         long start = System.nanoTime();
@@ -229,11 +282,14 @@ public class UI {
 
         System.out.print("\n" + algo + ":" + elapsedTime / 1000000.0 + "ms");
         if (showArray) {
-            System.out.println(" "+Arrays.toString(algo.getSortTarget()));
+            System.out.println(" " + Arrays.toString(algo.getSortTarget()));
         }
         System.out.println();
     }
 
+    /**
+     * Prints the comparisonMenuOptions
+     */
     private void comparisonMenuOptions() {
         System.out.println("\nChoose the algorithm you want to compare.\n"
                 + "Typing the number input again deselects the algorithm");

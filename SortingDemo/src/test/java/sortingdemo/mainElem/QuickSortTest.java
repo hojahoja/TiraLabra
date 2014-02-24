@@ -4,6 +4,7 @@
  */
 package sortingdemo.mainElem;
 
+import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,6 +17,7 @@ import static org.junit.Assert.*;
  * @author juri
  */
 public class QuickSortTest {
+    private QuickSort qs;
     
     public QuickSortTest() {
     }
@@ -30,5 +32,93 @@ public class QuickSortTest {
     
     @Before
     public void setUp() {
+        qs = new QuickSort();
+    }
+    
+    @Test
+    public void ArrayInsertWorks() {
+        Integer[] arr = {1, 4, 5, 6, 87};
+        qs.insertArray(arr);
+        
+        for (int i = 0; i < arr.length; i++) {
+            int num = qs.getSortTarget()[i];
+            assertTrue(arr[i] == num);
+        }
+    }
+    
+    @Test
+    public void canSortSimpleArrays() {
+        Integer[] arr = {3, 4, 2, 1};
+        qs.insertArray(arr);
+        
+        assertFalse("Something went wrong with the test", checkIfSorted(qs.getSortTarget()));
+        qs.sort();
+        assertTrue("Sorting failed", checkIfSorted(qs.getSortTarget()));
+    }
+    
+    @Test
+    public void canSortLongArrays() {
+        Integer[] arr = generateArrayWithRandomNumbers(1000000);
+        qs.insertArray(arr);
+        assertFalse("Something went wrong with the test", checkIfSorted(qs.getSortTarget()));
+        qs.sort();
+        assertTrue("Sorting failed", checkIfSorted(qs.getSortTarget()));
+    }
+    
+    @Test
+    public void canSortReverseArray() {
+        Integer[] arr = {10,9,8,7,6,5,4,3,2,1};
+        qs.insertArray(arr);
+        qs.insertArray(arr);
+        assertFalse("Something went wrong with the test", checkIfSorted(qs.getSortTarget()));
+        qs.sort();
+        assertTrue("Sorting failed", checkIfSorted(qs.getSortTarget()));
+    }
+    
+    @Test
+    public void canSortAnArrayWithNoDifferingValues() {
+        Integer[] arr = new Integer[100];
+        for (int i = 0; i < 100; i++) {
+            arr[i] = 1;
+        }
+        
+        qs.insertArray(arr);
+        qs.sort();
+        assertTrue("Sorting failed", checkIfSorted(qs.getSortTarget()));
+    }
+    
+    @Test
+    public void wontCrashWhenHandlingAnArrayWithASingleInteger() {
+        Integer[] arr = {1};
+        qs.insertArray(arr);
+        
+        
+        try {
+            qs.sort();
+            assertTrue(true);
+        } catch (Exception e) {
+            assertFalse(e.getMessage(),true);
+        }        
+    }
+    
+    private boolean checkIfSorted(Integer[] arr) {
+        int current = arr[0];
+        for (int i = 0; i < arr.length-1; i++) {
+            if (current > arr[i+1]) {
+                return false;
+            }
+            current = arr[i+1];
+        }
+        return true;
+    }
+    
+    private Integer[] generateArrayWithRandomNumbers(int quantity) {
+        Random rng = new Random();
+        Integer[] arr = new Integer[quantity];
+        for (int i = 0; i < quantity; i++) {
+            Integer current = rng.nextInt(100);
+            arr[i] = current;
+        }
+        return arr;
     }
 }

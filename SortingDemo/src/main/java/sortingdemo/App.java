@@ -1,32 +1,20 @@
 package sortingdemo;
 
-import sortingdemo.mainElem.MergeSort;
 import sortingdemo.mainElem.UI;
-import java.util.Arrays;
-import java.util.Random;
-import sortingdemo.mainElem.HeapSort;
-import sortingdemo.mainElem.QuickSort;
-import sun.net.www.content.image.gif;
 
 /**
- * Hello world!
+ * The Main class of this program.
  *
  */
 public class App {
 
+    /**
+     * Starts the program.
+     * 
+     * @param args 
+     */
     public static void main(String[] args) {
-//        UI ui = new UI();
-//        ui.start();
-//        
-////        MergeSort ms = new MergeSort();
-////        QuickSort ms = new QuickSort();
-//        HeapSort ms = new HeapSort();
-//        
-//        ms.insertArray(arr);
-//        
-//        ms.sort();
-//        System.out.println(Arrays.toString(arr));
-//        System.out.println(Arrays.toString(ms.getSortTarget()));
-        
+        UI ui = new UI();
+        ui.start();
     }
 }
