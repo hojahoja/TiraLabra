@@ -7,22 +7,43 @@ import java.util.Arrays;
  *
  * @author juri
  */
-public class MergeSort implements SortingAlgorithm{
+public class MergeSort implements SortingAlgorithm {
 
+    /**
+     * The array to be sorted.
+     *
+     */
     private Integer[] sortTarget;
 
     public MergeSort() {
         this.sortTarget = new Integer[0];
     }
 
+    /**
+     * Clones a target array so that the same values can be used by multiple
+     * algorithms
+     *
+     * @param sortTarget
+     */
     public void insertArray(Integer[] sortTarget) {
         this.sortTarget = sortTarget.clone();
     }
 
+    /**
+     * This method starts the sorting algorithm.
+     */
     public void sort() {
         sort(1, sortTarget.length);
     }
 
+    /**
+     * This is the recursive call of mergesort which is used to split values
+     * into two different parts. Afterwards they are sorted with the merge
+     * method
+     *
+     * @param low the lowest index
+     * @param high the highest index
+     */
     public void sort(int low, int high) {
         if (low < high) {
             int mid = (low + high) / 2;
@@ -32,7 +53,15 @@ public class MergeSort implements SortingAlgorithm{
         }
     }
 
+    /**
+     * The main sorting is done here.
+     *
+     * @param low index
+     * @param mid index
+     * @param high index
+     */
     private void merge(int low, int mid, int high) {
+        // The first part creates two extra arrays which contain the values from the current given low-high range split by the mid index
         int n1 = mid - low + 1;
         int n2 = high - mid;
         int[] left = new int[n1 + 1];
@@ -40,11 +69,14 @@ public class MergeSort implements SortingAlgorithm{
         for (int i = 0; i < n1; i++) {
             left[i] = sortTarget[low + i - 1];
         }
-        left[n1] = Integer.MAX_VALUE / 2;
+        left[n1] = 101;
         for (int i = 0; i < n2; i++) {
             right[i] = sortTarget[mid + i];
         }
-        right[n2] = Integer.MAX_VALUE / 2;
+        right[n2] = 101;
+
+        // This portion compares the two arrays and inserts the smaller of the two integers in to the main array.
+        // Runs until all of the comparisons are done.
         int i = 0;
         int j = 0;
         for (int k = low - 1; k < high; k++) {
@@ -61,7 +93,7 @@ public class MergeSort implements SortingAlgorithm{
     public Integer[] getSortTarget() {
         return sortTarget;
     }
-    
+
     public String toString() {
         return "MergeSort";
     }

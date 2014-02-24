@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * This class is used by the UI to help create the Arrays that will be sorted
+ * This class is used by the UI to help create the Arrays for sort testing.
  *
  * @author juri
  */
@@ -20,6 +20,10 @@ public class IntegerSelector {
         this.rng = new Random();
     }
 
+    /**
+     * Starts the IntegerSelector and prints it's initial menu.
+     *
+     */
     public void start() {
         System.out.println("\nChoose input method for integers");
         boolean exitCommandIsNotGiven = true;
@@ -35,6 +39,12 @@ public class IntegerSelector {
         }
     }
 
+    /**
+     * Takes input from the menu and calls the appropriate based on input.
+     *
+     * @param command
+     * @return determines if we want to go for the exit menu
+     */
     private boolean handleMenuCommands(String command) {
         System.out.println("\nGiving a wrong input will return you to previous menu");
 
@@ -54,12 +64,24 @@ public class IntegerSelector {
         return true;
     }
 
+    /**
+     * Calls a method for choosing the amount of Integers you want the array to
+     * sort.
+     *
+     * @return Integer
+     */
     private Integer chooseQuantity() {
         System.out.println("\nEnter the amount of integers you want sorted:\n");
 
         return addInteger();
     }
 
+    /**
+     * Makes sure you enter a set amount of random integers determined by
+     * quantity
+     *
+     * @param quantity
+     */
     private void enterOneByOne(Integer quantity) {
         if (quantity == null) {
             System.out.println("\nWrong Input\n");
@@ -80,6 +102,12 @@ public class IntegerSelector {
         }
     }
 
+    /**
+     * Uses the java class random to to generate pseudo-randomly integers
+     * between 1-100.
+     *
+     * @param quantity the amount of integers to be created
+     */
     private void generateRandomIntegers(Integer quantity) {
         if (quantity == null) {
             System.out.println("\nWrong Input\n");
@@ -93,6 +121,11 @@ public class IntegerSelector {
         }
     }
 
+    /**
+     * Makes sure that the input is in proper number format.
+     * 
+     * @return 
+     */
     private Integer addInteger() {
         try {
             return Integer.parseInt(scanner.nextLine());
@@ -101,6 +134,11 @@ public class IntegerSelector {
         }
     }
 
+    /**
+     * A check to make sure that the array doesn't contain any null values.
+     * 
+     * @return 
+     */
     public boolean ArrayWasInitializedProperly() {
         if (sortTarget != null) {
             for (int i = 0; i < sortTarget.length; i++) {
@@ -111,7 +149,12 @@ public class IntegerSelector {
         }
         return true;
     }
-    
+
+    /**
+     * A method for accessing the generated array
+     * 
+     * @return 
+     */
     public Integer[] getArray() {
         return sortTarget;
     }

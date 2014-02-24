@@ -1,5 +1,6 @@
 package sortingdemo.mainElem;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,8 @@ public class UI {
     private MergeSort mergeSort;
     private QuickSort quickSort;
     private HeapSort heapSort;
+    private boolean showArray;
+    private boolean selected[];
 
     public UI() {
         scanner = new Scanner(System.in);
@@ -23,6 +26,7 @@ public class UI {
         mergeSort = new MergeSort();
         quickSort = new QuickSort();
         heapSort = new HeapSort();
+        selected = new boolean[3];
     }
 
     /**
@@ -46,7 +50,7 @@ public class UI {
      * @return
      */
     private String initialMenu(String command) {
-        System.out.println("1: Visual demo");
+        System.out.println("1: Show Arrays On/Off");
         System.out.println("2: Time comparison");
         System.out.println("x: Stop the program\n");
 
@@ -64,7 +68,7 @@ public class UI {
      */
     private boolean handleStartMenuCommands(String command) {
         if (command.equals("1")) {
-            demoMenu();
+            toggleVisibleArrays();
         } else if (command.equals("2")) {
             comparisonMenu();
         } else if (command.equalsIgnoreCase("x")) {
@@ -75,6 +79,14 @@ public class UI {
         return true;
     }
 
+    private void toggleVisibleArrays() {
+        if (showArray == true) {
+            showArray = false;
+        } else {
+            showArray = true;
+        }
+    }
+    
     /**
      * Shows the demo menu.
      */
@@ -130,31 +142,73 @@ public class UI {
     }
 
     private void handeComparisonMenuCommands() throws Exception {
-        boolean[] selected = new boolean[3];
+        printOptionsMessage();
 
         while (true) {
-            String command = scanner.nextLine();
+            String command = scanner.nextLine();    
+            
+            
+            
             if (command.equals("1")) {
-                selected[0] = true;
+                toggleSelectedAlgorithm(0);
             } else if (command.equals("2")) {
-                selected[1] = true;
+                toggleSelectedAlgorithm(1);
             } else if (command.equals("3")) {
-                selected[2] = true;
+                toggleSelectedAlgorithm(2);
             } else if (command.equals("s")) {
                 intSelect.start();
                 startComparison(selected);
-                comparisonMenuOptions();
+                return;
             } else if (command.equals("r")) {
                 startComparison(selected);
-                comparisonMenuOptions();
+                return;
             } else if (command.equals("x")) {
                 break;
             }
+            
+            comparisonMenuOptions();
+            printOptionsMessage();
         }
+    }
+    
+    private void toggleSelectedAlgorithm(int index) {
+        if (selected[index] == true) {
+            selected[index] = false;
+        } else {
+            selected[index] = true;
+        }
+    }
+    
+    private void printOptionsMessage() {
+        System.out.println("\n");
+        System.out.print("Visible arrays: ");
+        if (showArray == true) {
+            System.out.println("On");
+        } else {
+            System.out.println("Off");
+        }
+        
+        System.out.println("Selected Algorithms: ");
+        if (selected[0] == true) {
+            System.out.print(" MergeSort");
+        }
+        if (selected[1] == true) {
+            System.out.print(" QuickSort");
+        }
+        if (selected[2] == true) {
+            System.out.print(" HeapSort");
+        }
+        
+        System.out.println();
     }
 
     private void startComparison(boolean[] selected) throws Exception {
 
+        if (showArray) {
+            System.out.println("target array: "+Arrays.toString(intSelect.getArray())+"\n");
+        }
+
+        
         if (selected[0] == true) {
             timedSort(mergeSort);
         }
@@ -169,12 +223,15 @@ public class UI {
 
     private void timedSort(SortingAlgorithm algo) throws Exception {
         algo.insertArray(intSelect.getArray());
-
         long start = System.nanoTime();
         algo.sort();
         long elapsedTime = System.nanoTime() - start;
 
-        System.out.println("\n" + algo + ":" + elapsedTime / 1000000000.0 + "s");
+        System.out.print("\n" + algo + ":" + elapsedTime / 1000000.0 + "ms");
+        if (showArray) {
+            System.out.println(" "+Arrays.toString(algo.getSortTarget()));
+        }
+        System.out.println();
     }
 
     private void comparisonMenuOptions() {
